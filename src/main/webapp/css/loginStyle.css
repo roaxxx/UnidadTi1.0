@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  background: url("../Imgs/logBack.jpg") no-repeat center top;
+  background-size: cover;
+  font-family: sans-serif;
+  height: 100vh;  
+}
+.registro {
+	width: 420px;
+	height: 474px;
+	background: #fff;
+	color: #0D47A1;
+	top:20%;
+	left:6%;
+	position: absolute;
+	transform: translade(50%,-50%);
+	box-sizing:border-box;
+	padding:100px 60px;
+	border-radius:3%;
+}
+.registro .avatar{
+	width: 150px;
+	height: 70px;
+	border-radius:5%;
+	position: absolute;
+	top:-30px;
+	left: 30%;
+}
+.registro h1 {
+	margin: 0;
+	padding: 0 0 20px;	
+	text-align: center;
+	font-size:22px;
+}
+
+.registro label {
+	margin: 0;
+	padding: 0;
+	font-weight:bold;
+	display:block;
+	
+
+}
+.registro input {
+	height: 40px;
+	margin-bottom:20px;
+}
+
+.registro input[type="text"], .registro input[type="password"] {
+	border:none;
+	border-bottom: 1px solid #000;
+	background: transparent;
+	outline: 40px;
+	color: #000;
+	font-size:16px;
+	width: 280px;
+}
+.registro input[type="submit"]{
+	border:none;
+	outline: none;
+	color: #fff;
+	height:40px;
+	font-size:16px;
+	background: #0D47A1;
+	font-size: 18px;
+	border-radius:15px;
+	width :220px;
+	position: absolute;
+	top:315px;
+	left: 30%;
+}
+.registro a{
+   text-decoration:none;
+   font-size: 14px;
+   line-height:20px;
+   color:darkblue;
+}
