@@ -5,7 +5,6 @@ import java.sql.*;
 
 public class Conexion {
 	private Connection conexion;
-	
 	public Conexion() {
 		
 	}
