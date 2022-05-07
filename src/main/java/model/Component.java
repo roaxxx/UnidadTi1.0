@@ -26,7 +26,6 @@ public class Component {
   
     }
 	
-
 	public Component(int comp_Id, String comp_name, String comp_location, String comp_domain, String comp_added_date,
 			String comp_category, String comp_State) {
 		super();
@@ -203,14 +202,132 @@ public class Component {
 			Statement st;
 			try {
 				st = connect.createStatement();
-				System.out.println(query);
-				//
+                st.execute(query);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}	
 	
+	public ArrayList<KeyWord> getKeyWords(){
+		String query="SELECT * FROM keyword WHERE COMPONENT_idComponent ="+getComp_Id()+";";
+		Statement st;
+		ResultSet rs;
+		try {
+			Connection connect = (new Conexion().getConexion());
+			st = connect.createStatement();
+			rs = st.executeQuery(query);
+			while (rs.next()) {
+				keywords.add(new KeyWord(rs.getInt(1), rs.getString(3)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return keywords;
+	}
+	
+	public void setFuntionality(ArrayList<Funtionality> funcionalities) {
+		Connection connect = (new Conexion().getConexion());
+		for(int i = 0; i <funcionalities.size(); i++) {
+			
+			String query="INSERT INTO functionality VALUES ("+funcionalities.get(i)
+				.getId_funtionality()+","+getComp_Id()+",'"+funcionalities.get(i).getName_fun()
+				+"','"+funcionalities.get(i).getDescrip_fun()+"');";
+			Statement st;
+			try {
+				st = connect.createStatement();
+                st.execute(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}	
+
+	public ArrayList<Funtionality> getFuncionlities(){
+		String query="SELECT * FROM functionality WHERE COMPONENT_idComponent ="+getComp_Id()+";";
+		Statement st;
+		ResultSet rs;
+		try {
+			Connection connect = (new Conexion().getConexion());
+			st = connect.createStatement();
+			rs = st.executeQuery(query);
+			while (rs.next()) {
+				funcionalities.add(new Funtionality(rs.getInt(1),rs.getString(3), rs.getString(4)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return funcionalities;
+	}
+	
+	public void setRequiredInterface(ArrayList<Required_Interface> requiredInterfaces) {
+		Connection connect = (new Conexion().getConexion());
+		for(int i = 0; i <requiredInterfaces.size(); i++) {
+			
+			String query="INSERT INTO required_interface VALUES ("+requiredInterfaces.get(i)
+			.getIdR_interface()+","+getComp_Id()+",'"+requiredInterfaces.get(i).getName_rq()
+				+"','"+requiredInterfaces.get(i).getRq_funtion()+"');";
+			Statement st;
+			try {
+				st = connect.createStatement();
+                st.execute(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}	
+
+	public ArrayList<Required_Interface> getRequiredInterfaces(){
+		String query="SELECT * FROM functionality WHERE COMPONENT_idComponent ="+getComp_Id()+";";
+		Statement st;
+		ResultSet rs;
+		try {
+			Connection connect = (new Conexion().getConexion());
+			st = connect.createStatement();
+			rs = st.executeQuery(query);
+			while (rs.next()) {
+				required_Interfaces.add(new Required_Interface(rs.getInt(1),rs.getString(3),rs.getString(4)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return required_Interfaces;
+	}
+	
+	public void setSuppliedInterface(ArrayList<Supplied_Interface> suppliedInterfaces) {
+		Connection connect = (new Conexion().getConexion());
+		for(int i = 0; i <suppliedInterfaces.size(); i++) {
+			
+			String query="INSERT INTO supplied_interface VALUES ("+suppliedInterfaces.get(i)
+			.getIdS_interface()+","+getComp_Id()+",'"+suppliedInterfaces.get(i).getName_si()
+				+"','"+suppliedInterfaces.get(i).getSi_funtion()+"');";
+			Statement st;
+			try {
+				st = connect.createStatement();
+                st.execute(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}	
+
+	public ArrayList<Supplied_Interface> getSuppliedInterfaces(){
+		String query="SELECT * FROM supplied_interface WHERE COMPONENT_idComponent ="+getComp_Id()+";";
+		Statement st;
+		ResultSet rs;
+		try {
+			Connection connect = (new Conexion().getConexion());
+			st = connect.createStatement();
+			rs = st.executeQuery(query);
+			while (rs.next()) {
+				supplied_Interfaces.add(new Supplied_Interface(rs.getInt(1),rs.getString(3),rs.getString(4)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return supplied_Interfaces;
+	} 
+	  
 	public int getComp_Id() {
 		return comp_Id;
 	}
