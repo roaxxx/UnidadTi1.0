@@ -3,6 +3,8 @@ package view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
+
 import model.*;
 
 public class Test {
@@ -267,11 +269,8 @@ public class Test {
 		OS os = new OS();
 		ArrayList<OS> oss2 = new ArrayList<OS>();
 		ArrayList<OS> osS = new ArrayList<OS>();
-		osS= os.selectOs();
+		osS= os.selecAllOs();
 		for(int i = 0; i<osS.size(); i++) {
-			if(i<2) {
-				oss2.add(osS.get(i));
-			}
 			System.out.println(i);
 			System.out.println(osS.get(i).getIdOs());
 			System.out.println(osS.get(i).getOs_name());
@@ -284,6 +283,7 @@ public class Test {
 		ArrayList<Component> comps = new ArrayList<Component>();
 		ArrayList<OS> oss = new ArrayList<OS>();
 		ArrayList<OS> oss1 = new ArrayList<OS>();
+		ArrayList<KeyWord> kws = new ArrayList<KeyWord>();
 		String link= "https://github.com/roaxxx/Comp.git";
 		Component comp = new Component();
 		System.out.println("Funciones: \n"+"Crear\n"+"consultar\n"
@@ -305,8 +305,8 @@ public class Test {
 			comp.setComp_category(sc.nextLine());
 			System.out.println("Estado (ACTIVO,INACTIVO)");
 			comp.setComp_State(sc.nextLine());
-			comp.insertComponent();
-			oss= os();
+			//comp.insertComponent();
+			oss= selectOS();
 			String s= " ";
 			while(!s.equals("END")) {
 				System.out.println("Seleccione sistemas operativos compatibles");
@@ -314,9 +314,17 @@ public class Test {
 				System.out.println("Terminar: (END)");
 				s = sc.nextLine();
 			}
-			comp.setOSsopported(oss1);
-			next(comp);
-			break;
+			//comp.setOSsopported(oss1);
+			s= " ";
+			//KeyWord k = new KeyWord();
+			while(!s.equals("END")) {
+				System.out.println("Ingrese la palabra clave");
+				kws.add(new KeyWord(0,sc.nextLine()));
+				System.out.println("Terminar: (END)");
+				s = sc.nextLine();
+			}
+			comp.setKeyWords(kws);
+				break;
 		case "CONSULTAR":
 			selectComps();
 			break;
@@ -340,24 +348,19 @@ public class Test {
 
 		}
 	}
-	public void next(Component comp) {
-		//KeyWord k = new KeyWord();
-		//k.setComp(comp);
-		ArrayList<KeyWord> ks = new ArrayList<KeyWord>();
-		String s= " ";
-		/*
-		while(!s.equals("END")) {
-			System.out.println("Ingrese palabras clave");
-			KeyWord k1 = new KeyWord(0, sc.nextLine(), comp));
-
-			k.i
-			ks.add(new KeyWord(0, sc.nextLine(), comp));
-			System.out.println("Terminar: (END)");
-			s = sc.nextLine();
-		}*/
-		//k.addKeyWord();
-
+	public ArrayList<OS> selectOS() {
+		OS os = new OS();
+		ArrayList<OS> kws = new ArrayList<OS>();
+		kws = os.selecAllOs();
+		System.out.println(kws.size());
+		for (int i = 0; i <kws.size(); i++) {
+			System.out.println(i);
+			System.out.println(kws.get(i).getOs_name());
+		}
+		
+		return kws;
 	}
+
 	public ArrayList<Component> selectComps() {
 		Component comp = new Component();
 		ArrayList<Component> comps = new ArrayList<Component>();

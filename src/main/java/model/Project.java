@@ -160,9 +160,8 @@ public class Project {
 			for (int i = 0; i<used_Comp.size();i++) {
 				String query = "INSERT INTO PROJECT_has_COMPONENT VALUES ("
 						+getProject_Id()+","+used_Comp.get(i)+")";
-				System.out.println(query);
 				st = c.createStatement();
-				//st.execute(query);
+				st.execute(query);
 			}		
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -170,7 +169,6 @@ public class Project {
 	}
 	
 	private ArrayList<Used_Component> selectUsedComponents() {
-		ArrayList<Project> projects = new ArrayList<Project>();
 		String query="SELECT * FROM PROJECT_has_COMPONENT;";
 		Statement st;
 		ResultSet rs;

@@ -17,13 +17,19 @@ public class Component {
     private String comp_category;
     private String comp_State;
     private ArrayList<OS> os;
+    private ArrayList<KeyWord> keywords;
+    private ArrayList<Required_Interface> required_Interfaces;
+    private ArrayList<Supplied_Interface> supplied_Interfaces;
+    private ArrayList<Funtionality> funcionalities;
 
     public Component() {
-
+  
     }
 	
+
 	public Component(int comp_Id, String comp_name, String comp_location, String comp_domain, String comp_added_date,
 			String comp_category, String comp_State) {
+		super();
 		this.comp_Id = comp_Id;
 		this.comp_name = comp_name;
 		this.comp_location = comp_location;
@@ -31,8 +37,8 @@ public class Component {
 		this.comp_added_date = comp_added_date;
 		this.comp_category = comp_category;
 		this.comp_State = comp_State;
-		this.os = os;
 	}
+
 
 	//Registro de desarrolladores
 	public String insertComponent() {
@@ -159,7 +165,8 @@ public class Component {
 		Connection connect = (new Conexion().getConexion());
 		for(int i = 0; i < os.size(); i++) {
 			
-			String query="INSERT INTO supported_os VALUES ("+getComp_Id()+","+os.get(i).getIdOs()+");";
+			String query="INSERT INTO supported_os VALUES ("+getComp_Id()+","
+					+os.get(i).getIdOs()+");";
 			Statement st;
 			try {
 				st = connect.createStatement();
@@ -169,9 +176,45 @@ public class Component {
 			}
 		}
 	}	
+	
+	public ArrayList<OS> getOsSopported(){
+		String query="SELECT * FROM supported_os WHERE COMPONENT_idComponent ="+getComp_Id()+";";
+		Statement st;
+		ResultSet rs;
+		try {
+			Connection connect = (new Conexion().getConexion());
+			st = connect.createStatement();
+			rs = st.executeQuery(query);
+			while (rs.next()) {
+				os.add(new OS().searchSopporedOs(rs.getInt(2)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return os;
+	}
+	
+	public void setKeyWords(ArrayList<KeyWord> keyWords) {
+		Connection connect = (new Conexion().getConexion());
+		for(int i = 0; i < keyWords.size(); i++) {
+			
+			String query="INSERT INTO keyword VALUES ("+keyWords.get(i).getIdKeyWord()
+					+","+getComp_Id()+",'"+keyWords.get(i).getKey_word()+"');";
+			Statement st;
+			try {
+				st = connect.createStatement();
+				System.out.println(query);
+				//
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}	
+	
 	public int getComp_Id() {
 		return comp_Id;
 	}
+	
 	public void setComp_Id(int comp_Id) {
 		this.comp_Id = comp_Id;
 	}
@@ -210,5 +253,5 @@ public class Component {
 	}
 	public void setComp_State(String comp_State) {
 		this.comp_State = comp_State;
-	}    
+	}  
 }

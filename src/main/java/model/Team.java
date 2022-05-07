@@ -173,4 +173,13 @@ public class Team {
 	public void setCreated_date(String created_date) {
 		this.created_date = created_date;
 	}
+
+	public ArrayList<Team_Up> getTeam_up() {
+		return team_up;
+	}
+
+	public void setTeam_up(ArrayList<Team_Up> team_up) {
+		this.team_up = team_up;
+	}
+	
 }

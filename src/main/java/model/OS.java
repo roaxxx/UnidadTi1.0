@@ -24,17 +24,36 @@ public class OS {
 		this.os_name = os_name;
 	}
 	
-	public ArrayList<OS> selectOs(){
-		ArrayList<OS> os = new ArrayList<OS>();
-		String query = "SELECT* FROM OS;";
-        Statement st;
+	public ArrayList<OS> selecAllOs(){
+		ArrayList<OS> oss = new ArrayList<OS>();
+		String query = "SELECT * FROM OS;";
+		Statement st;
 		ResultSet rs;
 		try {
-			Connection c = (new Conexion().getConexion());
-			st = c.createStatement();
+			Connection connect = (new Conexion().getConexion());
+			st = connect.createStatement();
 			rs = st.executeQuery(query);
 			while (rs.next()) {
-				os.add(new OS(rs.getInt(1),rs.getString(2)));
+				oss.add(new OS().searchSopporedOs(rs.getInt(1)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+		return oss;
+	}
+	
+	public OS searchSopporedOs(int idSo) {
+		OS os = null;
+		String query="SELECT * FROM os WHERE idSUPPORTED_SO ="+idSo+";";
+		Statement st;
+		ResultSet rs;
+		try {
+			Connection connect = (new Conexion().getConexion());
+			st = connect.createStatement();
+			rs = st.executeQuery(query);
+			while (rs.next()) {
+				os = new OS(rs.getInt(1), rs.getString(2));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

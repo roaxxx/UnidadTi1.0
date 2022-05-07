@@ -1,19 +1,11 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-
-import controller.Conexion;
-
 public class Used_Component {
+	
 	private String comp_impact;
 	private Component comp;
 	private String usedDate;
-	
-
-	
+		
 	public Used_Component(String comp_impact,Component comp,String usedDate) {
 		this.comp_impact = comp_impact;
 		this.comp = comp;
